@@ -1,12 +1,13 @@
+import java.util.Arrays;
 import java.util.Scanner;
 
-public class Q7M2 {
+public class Q8M2 {
     static int[] findPairSortM2(int[] arr,int n,int t){
         int i=0,j=n-1;
         while(i<j){
             int sum=arr[i]+arr[j];
             if(sum==t) 
-                return new int[]{arr[i],arr[j]};
+                return new int[]{i,j};
             else if(sum<t) 
                 i++;
             else 
@@ -28,6 +29,6 @@ public class Q7M2 {
         if(sol[0]==-1) 
             System.out.println("No pair exists");
         else 
-            System.out.println("Pair found: (" + sol[0] + ", " + sol[1] + ")");
+            System.out.println("Pair indices: " + Arrays.toString(sol));
     }
 }

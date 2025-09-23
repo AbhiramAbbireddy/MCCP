@@ -1,20 +1,25 @@
-import java.util.*;
-class Q6M1 {
-    static boolean findPangramM1(String s) {
-        HashSet<Character> set = new HashSet<>();
-        s=s.replace(" ", "");
-        for(char c: s.toCharArray())
-            set.add(c);
-        return set.size() == 26;
+import java.util.Scanner;
+
+public class Q6M1 {
+    static boolean findPairBFM1(int[] arr, int n, int t) {
+        for(int i=0;i<n-1;i++) {
+            for(int j=i+1;j<n;j++) {
+                if(arr[i]+arr[j]==t)
+                    return true;
+            }
+        }
+        return false;
     }
     public static void main(String[] args) {
-        Scanner sc= new Scanner(System.in);
-        System.out.println("Enter a word or a line of string : ");
-        String s=sc.nextLine();
-        boolean v=findPangramM1(s.trim().toLowerCase());
-        if(v)
-            System.out.println("The given (word or a line of string) is a Pangram");
-        else  
-            System.out.println("The given (word or a line of string) is not a Pangram");
+        Scanner sc=new Scanner(System.in);
+        System.out.print("Enter size of array: ");
+        int n=sc.nextInt();
+        int[] arr=new int[n];
+        System.out.println("Enter sorted elements:");
+        for(int i=0;i<n;i++) arr[i]=sc.nextInt();
+        System.out.print("Enter target sum: ");
+        int t=sc.nextInt();
+        boolean ans = findPairBFM1(arr,n,t);
+        System.out.println(ans ? "Pair exists" : "No pair exists");
     }
 }

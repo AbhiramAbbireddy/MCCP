@@ -1,17 +1,14 @@
-import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Scanner;
 
-public class Q4M2 {
-    static int[] findParisM2(int[] arr,int n, int t) {
-        Arrays.sort(arr);
-        int i=0,j=arr.length-1;
-        while(i<j) {
-            if(arr[i]+arr[j]==t)
-                return new int[]{arr[i],arr[j]};
-            else if(arr[i]+arr[j]<t)
-                i++;
-            else
-                j--;
+public class Q4M4 {
+    static int[] findParisM4(int[] arr,int n, int t) {
+        HashSet<Integer> set=new HashSet<>();
+        for(int num: arr) {
+            if(set.contains(t-num))
+                return new int[]{num,t-num};
+            else    
+                set.add(num);
         }
         return new int[]{-1,-1};
     }
@@ -25,7 +22,7 @@ public class Q4M2 {
             arr[i]=sc.nextInt();
         System.out.println("Enter the target sum: ");
         int t=sc.nextInt();
-        int[] sol = findParisM2(arr,n,t);
+        int[] sol = findParisM4(arr,n,t);
         if(sol[0]==-1)
             System.out.println("No pair exists with sum equal to target");
         else

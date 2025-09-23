@@ -1,19 +1,25 @@
+import java.util.Arrays;
 import java.util.Scanner;
 
-public class Q7M3 {
+public class Q8M3 {
+    static int binarySearch(int[] arr,int l,int h,int x){
+        while(l<=h){
+            int mid=(l+h)/2;
+            if(arr[mid]==x) 
+                return mid;
+            else if(arr[mid]<x) 
+                l=mid+1;
+            else 
+                h=mid-1;
+        }
+        return -1;
+    }
     static int[] findPairSortM3(int[] arr,int n,int t){
         for(int i=0;i<n;i++){
-            int rem = t - arr[i];
-            int l=i+1,h=n-1;
-            while(l<=h){
-                int mid=(l+h)/2;
-                if(arr[mid]==rem) 
-                    return new int[]{arr[i],arr[mid]};
-                else if(arr[mid]<rem) 
-                    l=mid+1;
-                else 
-                    h=mid-1;
-            }
+            int rem=t-arr[i];
+            int idx=binarySearch(arr,i+1,n-1,rem);
+            if(idx!=-1) 
+                return new int[]{i,idx};
         }
         return new int[]{-1,-1};
     }
@@ -31,6 +37,6 @@ public class Q7M3 {
         if(sol[0]==-1) 
             System.out.println("No pair exists");
         else 
-            System.out.println("Pair found: (" + sol[0] + ", " + sol[1] + ")");
+            System.out.println("Pair indices: " + Arrays.toString(sol));
     }
 }

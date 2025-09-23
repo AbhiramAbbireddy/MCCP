@@ -1,16 +1,14 @@
+import java.util.HashSet;
 import java.util.Scanner;
 
-public class Q7M2 {
-    static int[] findPairSortM2(int[] arr,int n,int t){
-        int i=0,j=n-1;
-        while(i<j){
-            int sum=arr[i]+arr[j];
-            if(sum==t) 
-                return new int[]{arr[i],arr[j]};
-            else if(sum<t) 
-                i++;
-            else 
-                j--;
+public class Q7M4 {
+    static int[] findPairSortM4(int[] arr,int n,int t){
+        HashSet<Integer> set = new HashSet<>();
+        for(int num: arr){
+            int rem=t-num;
+            if(set.contains(rem)) 
+                return new int[]{rem,num};
+            set.add(num);
         }
         return new int[]{-1,-1};
     }
@@ -24,7 +22,7 @@ public class Q7M2 {
         for(int i=0;i<n;i++) arr[i]=sc.nextInt();
         System.out.print("Enter target sum: ");
         int t=sc.nextInt();
-        int[] sol = findPairSortM2(arr,n,t);
+        int[] sol = findPairSortM4(arr,n,t);
         if(sol[0]==-1) 
             System.out.println("No pair exists");
         else 

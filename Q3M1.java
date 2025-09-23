@@ -1,18 +1,15 @@
-import java.util.*;
 
-public class Q3M2 {
-    static boolean findTargetM2(int[] arr,int n, int t) {
-        Arrays.sort(arr);
-        int i=0,j=arr.length-1;
-        while(i<j) {
-            if(arr[i]+arr[j]==t)
-                return true;
-            else if(arr[i]+arr[j]<t)
-                i++;
-            else
-                j--;
+import java.util.Scanner;
+
+public class Q3M1 {
+    static boolean findTargetM1(int[] arr,int n, int t) {
+        for(int i=0;i<n-1;i++) {
+            for(int j=i+1;j<n;j++) {
+                if(arr[i]+arr[j]==t)
+                    return true;
+            }
         }
-        return true;
+        return false;
     }
     public static void main(String[] args) {
         Scanner sc=new Scanner(System.in);
@@ -24,7 +21,7 @@ public class Q3M2 {
             arr[i]=sc.nextInt();
         System.out.println("Enter the target sum: ");
         int t=sc.nextInt();
-        boolean find = findTargetM2(arr,n,t);
+        boolean find = findTargetM1(arr,n,t);
         if(find)
             System.out.println(" The pair exists with sum equal to target");
         else    

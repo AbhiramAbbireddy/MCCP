@@ -1,27 +1,28 @@
 import java.util.*;
 
 public class Q5M1 {
-    static boolean usingHashMapQ5M1(int[] arr) {
-        HashMap<Integer, Integer> map = new HashMap<>();
-        for(int num : arr) 
-            map.put(num, map.getOrDefault(num, 0) + 1);
-        for (int freq : map.values()) {
-            if(freq%2!=0) 
-                return false;
+    static int[] findPairsidx1(int[] arr, int n, int t) {
+        for(int i=0; i<n-1; i++) {
+            for(int j=i+1; j<n; j++) {
+                if(arr[i]+arr[j]==t)
+                    return new int[]{i, j};
+            }
         }
-        return true;
+        return new int[]{-1,-1};
     }
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        System.out.print("Enter array size (even): ");
+        System.out.print("Enter size of array: ");
         int n = sc.nextInt();
         int[] arr = new int[n];
-        System.out.println("Enter array elements: ");
-        for(int i=0;i<n;i++)   
-            arr[i]=sc.nextInt();
-        if (usingHashMapQ5M1(arr))
-            System.out.println("Valid: All elements occur even number of times");
+        System.out.println("Enter elements of array:");
+        for(int i=0; i<n; i++) arr[i]=sc.nextInt();
+        System.out.print("Enter target sum: ");
+        int t = sc.nextInt();
+        int[] sol = findPairsidx1(arr, n, t);
+        if(sol[0]==-1)
+            System.out.println("No pair exists");
         else
-            System.out.println("Not Valid");
+            System.out.println("Pair indices: " + Arrays.toString(sol));
     }
 }

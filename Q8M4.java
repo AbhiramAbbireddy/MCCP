@@ -1,16 +1,13 @@
-import java.util.Scanner;
+import java.util.*;
 
-public class Q7M2 {
-    static int[] findPairSortM2(int[] arr,int n,int t){
-        int i=0,j=n-1;
-        while(i<j){
-            int sum=arr[i]+arr[j];
-            if(sum==t) 
-                return new int[]{arr[i],arr[j]};
-            else if(sum<t) 
-                i++;
-            else 
-                j--;
+public class Q8M4 {
+    static int[] findPairSortM4(int[] arr,int n,int t){
+        HashMap<Integer,Integer> map=new HashMap<>();
+        for(int i=0;i<n;i++){
+            int rem=t-arr[i];
+            if(map.containsKey(rem)) 
+                return new int[]{map.get(rem),i};
+            map.put(arr[i],i);
         }
         return new int[]{-1,-1};
     }
@@ -24,10 +21,10 @@ public class Q7M2 {
         for(int i=0;i<n;i++) arr[i]=sc.nextInt();
         System.out.print("Enter target sum: ");
         int t=sc.nextInt();
-        int[] sol = findPairSortM2(arr,n,t);
+        int[] sol = findPairSortM4(arr,n,t);
         if(sol[0]==-1) 
             System.out.println("No pair exists");
         else 
-            System.out.println("Pair found: (" + sol[0] + ", " + sol[1] + ")");
+            System.out.println("Pair indices: " + Arrays.toString(sol));
     }
 }

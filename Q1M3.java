@@ -1,14 +1,17 @@
 import java.util.HashSet;
 import java.util.Scanner;
 
-public class Q3M4 {
-    static boolean findTargetM4(int[] arr,int n, int t) {
+public class Q1M3 {
+    static boolean findTargetM4(int[] arr) {
         HashSet<Integer> set=new HashSet<>();
         for(int num: arr) {
-            if(set.contains(t-num))
+            if(num==0) {
+                if(set.contains(0))
+                    return true;
+            } 
+            else if(set.contains(-num)) 
                 return true;
-            else    
-                set.add(num);
+            set.add(num);
         }
         return false;
     }
@@ -20,12 +23,9 @@ public class Q3M4 {
         System.out.println("Enter the elements of the array: ");
         for(int i=0;i<n;i++)
             arr[i]=sc.nextInt();
-        System.out.println("Enter the target sum: ");
-        int t=sc.nextInt();
-        boolean find = findTargetM4(arr,n,t);
-        if(find)
-            System.out.println(" The pair exists with sum equal to target");
+        if(findTargetM4(arr))
+            System.out.println(" The pair exists with sum equal to zero");
         else    
-            System.out.println(" There is no  pair exists with sum equal to target");
+            System.out.println(" There is no  pair exists with sum equal to zero");
     }
 }

@@ -1,18 +1,18 @@
 import java.util.Scanner;
 
 public class Q6M2 {
-    static boolean findPairSortM2(int[] arr,int n,int t){
+    static int[] findPairSortM2(int[] arr,int n){
         int i=0,j=n-1;
         while(i<j){
             int sum=arr[i]+arr[j];
-            if(sum==t) 
-                return true;
-            else if(sum<t) 
+            if(sum==0) 
+                return new int[]{arr[i],arr[j]};
+            else if(sum<0) 
                 i++;
             else 
                 j--;
         }
-        return false;
+        return new int[]{-1,-1};
     }
 
     public static void main(String[] args){
@@ -21,10 +21,12 @@ public class Q6M2 {
         int n=sc.nextInt();
         int[] arr=new int[n];
         System.out.println("Enter sorted elements:");
-        for(int i=0;i<n;i++) arr[i]=sc.nextInt();
-        System.out.print("Enter target sum: ");
-        int t=sc.nextInt();
-        boolean ans = findPairSortM2(arr,n,t);
-        System.out.println(ans ? "Pair exists" : "No pair exists");
+        for(int i=0;i<n;i++) 
+            arr[i]=sc.nextInt();
+        int[] sol = findPairSortM2(arr,n);
+        if(sol[0]==-1) 
+            System.out.println("No pair exists");
+        else 
+            System.out.println("Pair found: (" + sol[0] + ", " + sol[1] + ")");
     }
 }

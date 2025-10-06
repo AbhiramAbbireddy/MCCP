@@ -1,33 +1,37 @@
-import java.util.Scanner;
+import java.util.*;
 
 public class Q7M2 {
-    static int[] findPairSortM2(int[] arr,int n,int t){
-        int i=0,j=n-1;
-        while(i<j){
-            int sum=arr[i]+arr[j];
-            if(sum==t) 
-                return new int[]{arr[i],arr[j]};
-            else if(sum<t) 
-                i++;
+    static int[] mergeTwoPointers(int[] a, int m, int[] b, int n) {
+        int[] res=new int[m + n];
+        int i=0,j=0,k=0;
+        while(i<m && j<n) {
+            if(a[i]<=b[j]) 
+                res[k++]=a[i++];
             else 
-                j--;
+                res[k++]=b[j++];
         }
-        return new int[]{-1,-1};
+        while(i<m) 
+            res[k++]=a[i++];
+        while(j<n) 
+            res[k++]=b[j++];
+        return res;
     }
 
-    public static void main(String[] args){
-        Scanner sc=new Scanner(System.in);
-        System.out.print("Enter size of array: ");
-        int n=sc.nextInt();
-        int[] arr=new int[n];
-        System.out.println("Enter sorted elements:");
-        for(int i=0;i<n;i++) arr[i]=sc.nextInt();
-        System.out.print("Enter target sum: ");
-        int t=sc.nextInt();
-        int[] sol = findPairSortM2(arr,n,t);
-        if(sol[0]==-1) 
-            System.out.println("No pair exists");
-        else 
-            System.out.println("Pair found: (" + sol[0] + ", " + sol[1] + ")");
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter the size of the first array: ");
+        int m = sc.nextInt();
+        int[] arr1 = new int[m];
+        System.out.println("Enter the elements in the array: ");
+        for(int i = 0; i < m; i++)
+            arr1[i] = sc.nextInt();
+        System.out.println("Enter the size of the second array: ");
+        int n = sc.nextInt();
+        int[] arr2 = new int[n];
+        System.out.println("Enter the elements in the array: ");
+        for(int i = 0; i < n; i++)
+            arr2[i] = sc.nextInt();
+        int[] merged=mergeTwoPointers(arr1, m, arr2, n);
+        System.out.println("Merged (Method 2): " + Arrays.toString(merged));
     }
 }

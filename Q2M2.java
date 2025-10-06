@@ -1,18 +1,16 @@
 import java.util.*;
 
-public class Q3M3 {
-    static int[] findParisM4(int[] arr,int n) {
+public class Q2M2 {
+    static int[] findParisM2(int[] arr) {
         Arrays.sort(arr);
-        HashMap<Integer,Integer> map=new HashMap<>();
-        for(int i=0;i<n;i++){
-            int num = arr[i];
-            if(num==0) {
-                if(map.containsKey(0))
-                    return new int[]{map.get(0),i};
-            }
-            else if(map.containsKey(-num))
-                return new int[]{map.get(-num), i};
-            map.put(num,i);
+        int i=0,j=arr.length-1;
+        while(i<j) {
+            if(arr[i]+arr[j]==0)
+                return new int[]{arr[i],arr[j]};
+            else if(arr[i]+arr[j]<0)
+                i++;
+            else
+                j--;
         }
         return new int[]{-1,-1};
     }
@@ -24,9 +22,9 @@ public class Q3M3 {
         System.out.println("Enter the elements of the array: ");
         for(int i=0;i<n;i++)
             arr[i]=sc.nextInt();
-        int[] sol = findParisM4(arr,n);
+        int[] sol = findParisM2(arr);
         if(sol[0]==-1)
-            System.out.println("No pair exists with sum equal to target");
+            System.out.println("No pair exists with sum equal to zero");
         else
             System.out.println("Pair found: (" + sol[0] + ", " + sol[1] + ")");
     }

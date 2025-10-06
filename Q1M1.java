@@ -1,14 +1,15 @@
-import java.util.*;
 
-public class Q3M1 {
-    static int[] findParisM3(int[] arr,int n) {
+import java.util.Scanner;
+
+public class Q1M1 {
+    static boolean findTargetM1(int[] arr,int n) {
         for(int i=0;i<n-1;i++) {
             for(int j=i+1;j<n;j++) {
                 if(arr[i]+arr[j]==0)
-                    return new int[]{i,j};
+                    return true;
             }
         }
-        return new int[] {-1,-1};
+        return false;
     }
     public static void main(String[] args) {
         Scanner sc=new Scanner(System.in);
@@ -18,10 +19,9 @@ public class Q3M1 {
         System.out.println("Enter the elements of the array: ");
         for(int i=0;i<n;i++)
             arr[i]=sc.nextInt();
-        int[] sol=findParisM3(arr,n);
-        if(sol[0]==-1)
-            System.out.println("No pair exists with sum equal to target");
-        else
-            System.out.println("Pair found: (" + sol[0] + ", " + sol[1] + ")");
+        if(findTargetM1(arr,n))
+            System.out.println(" The pair exists with sum equal to zero");
+        else    
+            System.out.println(" There is no  pair exists with sum equal to zero");
     }
 }

@@ -1,21 +1,19 @@
-import java.util.Scanner;
+import java.util.*;
 
 public class Q6M3 {
-    static boolean findPairSortM3(int[] arr,int n,int t){
+    static int[] findPairSortM4(int[] arr,int n){
+        HashMap<Integer,Integer> map=new HashMap<>();
         for(int i=0;i<n;i++){
-            int rem=t-arr[i];
-            int l=i+1,h=n-1;
-            while(l<=h){
-                int mid=(l+h)/2;
-                if(arr[mid]==rem) 
-                    return true;
-                else if(arr[mid]<rem) 
-                    l=mid+1;
-                else 
-                    h=mid-1;
+            int num = arr[i];
+            if(num==0) {
+                if(map.containsKey(0))
+                    return new int[]{map.get(0),i};
             }
+            else if(map.containsKey(-num))
+                return new int[]{map.get(-num), i};
+            map.put(num,i);
         }
-        return false;
+        return new int[]{-1,-1};
     }
 
     public static void main(String[] args){
@@ -24,10 +22,12 @@ public class Q6M3 {
         int n=sc.nextInt();
         int[] arr=new int[n];
         System.out.println("Enter sorted elements:");
-        for(int i=0;i<n;i++) arr[i]=sc.nextInt();
-        System.out.print("Enter target sum: ");
-        int t=sc.nextInt();
-        boolean ans = findPairSortM3(arr,n,t);
-        System.out.println(ans ? "Pair exists" : "No pair exists");
+        for(int i=0;i<n;i++) 
+            arr[i]=sc.nextInt();
+        int[] sol = findPairSortM4(arr,n);
+        if(sol[0]==-1) 
+            System.out.println("No pair exists");
+        else 
+            System.out.println("Pair found: (" + sol[0] + ", " + sol[1] + ")");
     }
 }

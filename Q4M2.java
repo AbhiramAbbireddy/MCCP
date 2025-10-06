@@ -1,34 +1,29 @@
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Q4M2 {
-    static int[] findParisM2(int[] arr,int n, int t) {
-        Arrays.sort(arr);
-        int i=0,j=arr.length-1;
-        while(i<j) {
-            if(arr[i]+arr[j]==t)
-                return new int[]{arr[i],arr[j]};
-            else if(arr[i]+arr[j]<t)
+    static boolean findPairSortM2(int[] arr,int n){
+        int i=0,j=n-1;
+        while(i<j){
+            int sum=arr[i]+arr[j];
+            if(sum==0) 
+                return true;
+            else if(sum<0) 
                 i++;
-            else
+            else 
                 j--;
         }
-        return new int[]{-1,-1};
+        return false;
     }
-    public static void main(String[] args) {
+
+    public static void main(String[] args){
         Scanner sc=new Scanner(System.in);
-        System.out.println("Enter the size of the array: ");
+        System.out.print("Enter size of array: ");
         int n=sc.nextInt();
         int[] arr=new int[n];
-        System.out.println("Enter the elements of the array: ");
-        for(int i=0;i<n;i++)
+        System.out.println("Enter sorted elements:");
+        for(int i=0;i<n;i++) 
             arr[i]=sc.nextInt();
-        System.out.println("Enter the target sum: ");
-        int t=sc.nextInt();
-        int[] sol = findParisM2(arr,n,t);
-        if(sol[0]==-1)
-            System.out.println("No pair exists with sum equal to target");
-        else
-            System.out.println("Pair found: (" + sol[0] + ", " + sol[1] + ")");
+        boolean ans = findPairSortM2(arr,n);
+        System.out.println(ans ? "Pair exists" : "No pair exists");
     }
 }

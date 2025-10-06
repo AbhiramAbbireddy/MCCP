@@ -1,7 +1,7 @@
 import java.util.*;
 
-public class Q5M3 {
-    static int[] findPairsidx4(int[] arr, int n) {
+public class Q2M3 {
+    static int[] findTargetM3(int[] arr) {
         HashSet<Integer> set=new HashSet<>();
         for(int num: arr) {
             if(num==0) {
@@ -14,19 +14,18 @@ public class Q5M3 {
         }
         return new int[]{-1,-1};
     }
-
     public static void main(String[] args) {
         Scanner sc=new Scanner(System.in);
-        System.out.print("Enter size of array: ");
+        System.out.println("Enter the size of the array: ");
         int n=sc.nextInt();
         int[] arr=new int[n];
-        System.out.println("Enter sorted elements of array:");
-        for(int i=0;i<n;i++) 
+        System.out.println("Enter the elements of the array: ");
+        for(int i=0;i<n;i++)
             arr[i]=sc.nextInt();
-        int[] sol=findPairsidx4(arr,n);
+        int[] sol=findTargetM3(arr);
         if(sol[0]==-1)
-            System.out.println("No pair exists");
-        else
-            System.out.println("Pair indices: " + Arrays.toString(sol));
+        System.out.println(" There is no pair exists with sum equal to target");
+    else    
+        System.out.println(" The pair exists with sum equal to target: (" + sol[0] + "," + sol[1] + ")");
     }
 }

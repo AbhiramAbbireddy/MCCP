@@ -1,29 +1,35 @@
 import java.util.Scanner;
 
 public class Q4M2 {
-    static boolean findPairSortM2(int[] arr,int n){
+    static int countPairsSortedM2(int[] a, int n, int t) {
+        int count=0;
         int i=0,j=n-1;
-        while(i<j){
-            int sum=arr[i]+arr[j];
-            if(sum==0) 
-                return true;
-            else if(sum<0) 
+        while(i<j) {
+            int sum=a[i]+a[j];
+            if(sum==t) {
+                count++;
                 i++;
-            else 
                 j--;
+            } else if(sum<t) {
+                i++;
+            } else {
+                j--;
+            }
         }
-        return false;
+        return count;
     }
 
-    public static void main(String[] args){
-        Scanner sc=new Scanner(System.in);
-        System.out.print("Enter size of array: ");
-        int n=sc.nextInt();
-        int[] arr=new int[n];
-        System.out.println("Enter sorted elements:");
-        for(int i=0;i<n;i++) 
-            arr[i]=sc.nextInt();
-        boolean ans = findPairSortM2(arr,n);
-        System.out.println(ans ? "Pair exists" : "No pair exists");
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter the length of the array: ");
+        int n = sc.nextInt();
+        int[] arr = new int[n];
+        System.out.println("Enter the elements in the sorted array: ");
+        for(int i=0;i<n;i++)
+            arr[i] = sc.nextInt();
+        System.out.println("Enter a target element: ");
+        int t = sc.nextInt();
+        int count = countPairsSortedM2(arr, n, t);
+        System.out.println("Count of pairs equal to target: " + count);
     }
 }

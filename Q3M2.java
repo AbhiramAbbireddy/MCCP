@@ -1,32 +1,36 @@
-import java.util.Arrays;
-import java.util.Scanner;
+import java.util.*;
 
 public class Q3M2 {
-    static int[] findParisM2(int[] arr,int n) {
-        Arrays.sort(arr);
-        int i=0,j=arr.length-1;
+    static int countPairsUnsortedM2(int[] a, int n, int t) {
+        Arrays.sort(a); 
+        int count=0;
+        int i=0,j=n-1;
         while(i<j) {
-            if(arr[i]+arr[j]==0)
-                return new int[]{i,j};
-            else if(arr[i]+arr[j]<0)
+            int sum=a[i]+a[j];
+            if(sum==t) {
+                count++;
                 i++;
-            else
                 j--;
+            } else if (sum<t) {
+                i++;
+            } else {
+                j--;
+            }
         }
-        return new int[]{-1,-1};
+        return count;
     }
+
     public static void main(String[] args) {
         Scanner sc=new Scanner(System.in);
-        System.out.println("Enter the size of the array: ");
+        System.out.println("Enter the length of the array: ");
         int n=sc.nextInt();
         int[] arr=new int[n];
-        System.out.println("Enter the elements of the array: ");
-        for(int i=0;i<n;i++)
+        System.out.println("Enter the elements in the array: ");
+        for(int i=0;i<n;i++) 
             arr[i]=sc.nextInt();
-        int[] sol=findParisM2(arr,n);
-        if(sol[0]==-1)
-            System.out.println("No pair exists with sum equal to target");
-        else
-            System.out.println("Pair found: (" + sol[0] + ", " + sol[1] + ")");
+        System.out.println("Enter a target element: ");
+        int t=sc.nextInt();
+        int count=countPairsUnsortedM2(arr,n,t);
+        System.out.println("Count of pairs equal to target: " + count);
     }
 }

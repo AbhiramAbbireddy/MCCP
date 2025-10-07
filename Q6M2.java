@@ -1,32 +1,32 @@
-import java.util.Scanner;
+import java.util.*;
 
 public class Q6M2 {
-    static int[] findPairSortM2(int[] arr,int n){
-        int i=0,j=n-1;
-        while(i<j){
-            int sum=arr[i]+arr[j];
-            if(sum==0) 
-                return new int[]{arr[i],arr[j]};
-            else if(sum<0) 
-                i++;
-            else 
-                j--;
+    static int countPairsWithDuplicatesM2(int[] a,int n,int t) {
+        HashMap<Integer,Integer> map=new HashMap<>();
+        int count=0;
+        for(int i=0;i<n;i++) {
+            int x=a[i];
+            int y=t-x;
+            if(map.containsKey(y) && map.get(y)>0) {
+                int c=map.get(y);
+                count+=c;
+            }
+            map.put(x,map.getOrDefault(x,0)+1);
         }
-        return new int[]{-1,-1};
+        return count;
     }
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         Scanner sc=new Scanner(System.in);
-        System.out.print("Enter size of array: ");
+        System.out.println("Enter the length of the array: ");
         int n=sc.nextInt();
         int[] arr=new int[n];
-        System.out.println("Enter sorted elements:");
-        for(int i=0;i<n;i++) 
+        System.out.println("Enter the elements in the array: ");
+        for(int i=0;i<n;i++)
             arr[i]=sc.nextInt();
-        int[] sol = findPairSortM2(arr,n);
-        if(sol[0]==-1) 
-            System.out.println("No pair exists");
-        else 
-            System.out.println("Pair found: (" + sol[0] + ", " + sol[1] + ")");
+        System.out.println("Enter a target element: ");
+        int t=sc.nextInt();
+        int count=countPairsWithDuplicatesM2(arr,n,t);
+        System.out.println("Count of pairs equal to target: " + count);
     }
 }

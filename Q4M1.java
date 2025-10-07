@@ -1,24 +1,28 @@
 import java.util.Scanner;
 
 public class Q4M1 {
-    static boolean findPairBFM1(int[] arr, int n) {
+    static int countPairsSortedM1(int[] a, int n, int t) {
+        int count=0;
         for(int i=0;i<n-1;i++) {
             for(int j=i+1;j<n;j++) {
-                if(arr[i]+arr[j]==0)
-                    return true;
+                if(a[i]+a[j]==t)
+                    count++;
             }
         }
-        return false;
+        return count;
     }
+
     public static void main(String[] args) {
-        Scanner sc=new Scanner(System.in);
-        System.out.print("Enter size of array: ");
-        int n=sc.nextInt();
-        int[] arr=new int[n];
-        System.out.println("Enter sorted elements:");
-        for(int i=0;i<n;i++) 
-            arr[i]=sc.nextInt();
-        boolean ans = findPairBFM1(arr,n);
-        System.out.println(ans ? "Pair exists" : "No pair exists");
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter the length of the array: ");
+        int n = sc.nextInt();
+        int[] arr = new int[n];
+        System.out.println("Enter the elements in the sorted array: ");
+        for(int i=0;i<n;i++)
+            arr[i] = sc.nextInt();
+        System.out.println("Enter a target element: ");
+        int t = sc.nextInt();
+        int count = countPairsSortedM1(arr, n, t);
+        System.out.println("Count of pairs equal to target: " + count);
     }
 }

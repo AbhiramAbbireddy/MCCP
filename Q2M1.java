@@ -1,27 +1,37 @@
-import java.util.Scanner;
+import java.util.*;
 
 public class Q2M1 {
-    static int[] findParisM1(int[] arr,int n) {
+    static List<List<Integer>> findParisSortedM1(int[] a,int n,int t) {
+        List<List<Integer>> li=new ArrayList<>();
         for(int i=0;i<n-1;i++) {
             for(int j=i+1;j<n;j++) {
-                if(arr[i]+arr[j]==0)
-                    return new int[]{arr[i],arr[j]};
+                if(a[i]+a[j]==t) {
+                    List<Integer> l=new ArrayList<>();
+                    l.add(a[i]);
+                    l.add(a[j]);
+                    li.add(l);
+                }
             }
         }
-        return new int[] {-1,-1};
+        return li;
     }
     public static void main(String[] args) {
         Scanner sc=new Scanner(System.in);
-        System.out.println("Enter the size of the array: ");
+        System.out.println("Enter the length of the array: ");
         int n=sc.nextInt();
         int[] arr=new int[n];
-        System.out.println("Enter the elements of the array: ");
+        System.out.println("Enter the elements in the sorted array: ");
         for(int i=0;i<n;i++)
             arr[i]=sc.nextInt();
-        int[] sol = findParisM1(arr,n);
-        if(sol[0]==-1)
-            System.out.println("No pair exists with sum equal to target");
-        else
-            System.out.println("Pair found: (" + sol[0] + ", " + sol[1] + ")");
+        System.out.println("Enter a target element: ");
+        int t=sc.nextInt();
+        List<List<Integer>> al=findParisSortedM1(arr,n,t);
+        if(al.isEmpty())
+            System.out.println("There are no element pairs in the array equal to the target.");
+        else {
+            System.out.println("The pairs equal to the target in the array are: ");
+            for(List<Integer> a : al)
+                System.out.println(a.get(0) + " " + a.get(1)); 
+        }
     }
 }

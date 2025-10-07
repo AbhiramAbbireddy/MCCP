@@ -1,31 +1,39 @@
-import java.util.HashSet;
-import java.util.Scanner;
+import java.util.*;
 
 public class Q1M3 {
-    static boolean findTargetM4(int[] arr) {
-        HashSet<Integer> set=new HashSet<>();
-        for(int num: arr) {
-            if(num==0) {
-                if(set.contains(0))
-                    return true;
-            } 
-            else if(set.contains(-num)) 
-                return true;
-            set.add(num);
+    static List<List<Integer>> findParisUnsortedM3(int[] a,int n,int t) {Arrays.sort(a);
+        List<List<Integer>> li=new ArrayList<>();
+        HashMap<Integer,Integer> map=new HashMap<>();
+        for(int i=0;i<n;i++) {
+            int x=a[i];
+            int y=t-a[i];
+            if(map.containsKey(y)) {
+                List<Integer> l=new ArrayList<>();
+                l.add(y);
+                l.add(x);
+                li.add(l);
+            } else  
+                map.put(x,1);
         }
-        return false;
+        return li;
     }
     public static void main(String[] args) {
         Scanner sc=new Scanner(System.in);
-        System.out.println("Enter the size of the array: ");
+        System.out.println("Enter the length of the array: ");
         int n=sc.nextInt();
         int[] arr=new int[n];
-        System.out.println("Enter the elements of the array: ");
+        System.out.println("Enter the elements in the array: ");
         for(int i=0;i<n;i++)
             arr[i]=sc.nextInt();
-        if(findTargetM4(arr))
-            System.out.println(" The pair exists with sum equal to zero");
-        else    
-            System.out.println(" There is no  pair exists with sum equal to zero");
+        System.out.println("Enter a target element: ");
+        int t=sc.nextInt();
+        List<List<Integer>> al=findParisUnsortedM3(arr,n,t);
+        if(al.isEmpty())
+            System.out.println("There are no element pairs in the array equal to the target.");
+        else {
+            System.out.println("The pairs equal to the target in the array are: ");
+            for(List<Integer> a : al)
+                System.out.println(a.get(0) + " " + a.get(1)); 
+        }
     }
 }

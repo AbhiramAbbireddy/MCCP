@@ -1,29 +1,32 @@
-import java.util.HashSet;
-import java.util.Scanner;
+import java.util.*;
 
 public class Q4M3 {
-    static boolean findPairSortM4(int[] arr,int n){
-        HashSet<Integer> set=new HashSet<>();
-        for(int num: arr){
-            if(num==0) {
-                if(set.contains(0))
-                    return true;
+    static int countPairsSortedM3(int[] a, int n, int t) {
+        HashMap<Integer, Integer> map=new HashMap<>();
+        int count=0;
+        for(int i=0;i<n;i++) {
+            int x=a[i];
+            int y=t-x;
+            if(map.containsKey(y)) {
+                count++;
+            } else {
+                map.put(x, 1);
             }
-            if(set.contains(-num)) 
-                return true;
-            set.add(num);
         }
-        return false;
+        return count;
     }
 
-    public static void main(String[] args){
-        Scanner sc=new Scanner(System.in);
-        System.out.print("Enter size of array: ");
-        int n=sc.nextInt();
-        int[] arr=new int[n];
-        System.out.println("Enter sorted elements:");
-        for(int i=0;i<n;i++) arr[i]=sc.nextInt();
-        boolean ans = findPairSortM4(arr,n);
-        System.out.println(ans ? "Pair exists" : "No pair exists");
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter the length of the array: ");
+        int n = sc.nextInt();
+        int[] arr = new int[n];
+        System.out.println("Enter the elements in the sorted array: ");
+        for(int i=0;i<n;i++)
+            arr[i] = sc.nextInt();
+        System.out.println("Enter a target element: ");
+        int t = sc.nextInt();
+        int count = countPairsSortedM3(arr, n, t);
+        System.out.println("Count of pairs equal to target: " + count);
     }
 }

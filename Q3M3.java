@@ -1,33 +1,32 @@
 import java.util.*;
 
 public class Q3M3 {
-    static int[] findParisM4(int[] arr,int n) {
-        Arrays.sort(arr);
-        HashMap<Integer,Integer> map=new HashMap<>();
-        for(int i=0;i<n;i++){
-            int num = arr[i];
-            if(num==0) {
-                if(map.containsKey(0))
-                    return new int[]{map.get(0),i};
+    static int countPairsUnsortedM3(int[] a, int n, int t) {
+        HashMap<Integer, Integer> map=new HashMap<>();
+        int count=0;
+        for(int i=0;i<n;i++) {
+            int x=a[i];
+            int y=t-x;
+            if(map.containsKey(y)) {
+                count++;
+            } else {
+                map.put(x, 1); 
             }
-            else if(map.containsKey(-num))
-                return new int[]{map.get(-num), i};
-            map.put(num,i);
         }
-        return new int[]{-1,-1};
+        return count;
     }
+
     public static void main(String[] args) {
         Scanner sc=new Scanner(System.in);
-        System.out.println("Enter the size of the array: ");
+        System.out.println("Enter the length of the array: ");
         int n=sc.nextInt();
         int[] arr=new int[n];
-        System.out.println("Enter the elements of the array: ");
-        for(int i=0;i<n;i++)
+        System.out.println("Enter the elements in the array: ");
+        for(int i=0;i<n;i++) 
             arr[i]=sc.nextInt();
-        int[] sol = findParisM4(arr,n);
-        if(sol[0]==-1)
-            System.out.println("No pair exists with sum equal to target");
-        else
-            System.out.println("Pair found: (" + sol[0] + ", " + sol[1] + ")");
+        System.out.println("Enter a target element: ");
+        int t=sc.nextInt();
+        int count=countPairsUnsortedM3(arr,n,t);
+        System.out.println("Count of pairs equal to target: " + count);
     }
 }
